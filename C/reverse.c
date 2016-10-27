@@ -35,7 +35,7 @@ void main(int argc, char *argv[])
 		str[len - 2 - i] = tmp;
 	}
 
-	Bflush(&out);
+	//Bflush(&out);
 
 	/* simple frontend to print(2) */
 	Bprint(&out, "%s\n", str);
