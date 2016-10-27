@@ -1,0 +1,2 @@
+#!/bin/rc
+aux/listen1 -tv tcp!*!7777 /bin/exportfs -R -r /

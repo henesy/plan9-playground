@@ -1,0 +1,6 @@
+#!/bin/rc
+echo 'Pulling the latest 9front wiki'
+cd $home
+cd docs
+hg clone https://code.google.com/p/plan9front.wiki
+echo 'Done pulling the latest 9front wiki!'

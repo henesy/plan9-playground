@@ -1,0 +1,10 @@
+#!/bin/rc
+window 0,0,161,130 stats -lmisce
+# window -hide cat /dev/kprint
+window -r 600 500 959 600 -hide cat /dev/kprint
+# window -r 809,0,959,150 150,0,300,150 winwatch -e '^(stats|winwatch|faces|top)$'
+#window 874,0,1024,150 winwatch -e '^(stats|winwatch|faces|top)$'
+window 809,0,959,150 winwatch -e '^(stats|winwatch|faces|top)$'
+window 161,0,350,80 faces -i
+sleep 0.1
+window rc
