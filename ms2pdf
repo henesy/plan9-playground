@@ -1,0 +1,3 @@
+#!/bin/rc
+troff -ms $1 | dpost -f > $2
+

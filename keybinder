@@ -1,0 +1,3 @@
+#!/bin/rc
+echo 'Binding auth/keyfs to /adm/keys...'
+auth/keyfs -wp -m /mnt/keys /adm/keys

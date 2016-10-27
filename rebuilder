@@ -1,0 +1,105 @@
+#!/bin/rc
+# By Sean Hinchee
+# Rebuilder is an auto-build script to rebuild Plan9 for an architecture of choice
+version='v1.0'
+echo -n 'Rebuilder '
+echo $version
+echo -n 'Enter new object type: '
+objtype=`{read;}
+echo "$objtype"' will be our new objtype.'
+# add a check here
+echo 'REBUILDING COMPILERS'
+sleep 1
+# should add a case/decision here
+cd /sys/src/cmd/1c
+mk nuke
+mk install
+cd /sys/src/cmd/2c
+mk nuke
+mk install
+cd /sys/src/cmd/5c
+mk nuke
+mk install
+cd /sys/src/cmd/6c
+mk nuke
+mk install
+cd /sys/src/cmd/7c
+mk nuke
+mk install
+cd /sys/src/cmd/8c
+mk nuke
+mk install
+echo 'DONE REBUILDING COMPILERS'
+# begin main build
+echo 'GENERATING COMMONLY MISSING DIRECTORIES'
+echo 'ERRORS MAY OCCUR IN THIS PORTION'
+sleep 1
+#makeme=mkdir /$objtype/bin/
+mkdir /$objtype/bin/audio
+mkdir /$objtype/bin/auth
+mkdir /$objtype/bin/ip
+mkdir /$objtype/bin/ip/httpd
+mkdir /$objtype/bin/games
+mkdir /$objtype/bin/ndb
+mkdir /$objtype/bin/nusb
+mkdir /$objtype/bin/upas
+mkdir /$objtype/bin/replica
+mkdir /$objtype/bin/fs
+mkdir /$objtype/bin/venti
+mkdir /$objtype/bin/bitsy
+mkdir /$objtype/bin/dial
+mkdir /$objtype/bin/disk
+mkdir /acme/bin/$objtype
+echo 'DONE GENERATING DIRECTORIES'
+echo 'BUILDING LIBRARIES'
+sleep 1
+cd /sys/src
+mk nuke
+mk libs
+mk all
+echo 'DONE BUILDING LIBRARIES'
+echo 'BUILDING COMMANDS'
+cd /sys/src/cmd
+mk nuke
+mk all
+echo 'DONE BUILDING COMMANDS'
+echo 'INSTALLING LIBRARIES'
+sleep 1
+cd /sys/src
+mk install
+echo 'DONE INSTALLING LIBRARIES'
+echo 'INSTALLING COMMANDS'
+sleep 1
+cd /sys/src/cmd
+mk install
+echo 'DONE INSTALLING COMMANDS'
+echo 'BUILDING KERNEL'
+sleep 1
+# add in if/else for arm/386/x86-64
+switch($objtype) {
+case *arm∗
+	echo 'USING ARM ARCHITECTURE'
+	sleep 1
+case *38*
+	echo 'USING 38* ARCHITECTURE'
+	sleep 1
+case *64*
+	echo 'USING *64 ARCHITECTURE'
+	sleep 1
+}
+switch($objtype) {
+case *arm*
+	cd /sys/src/9/bcm
+case *38*
+	cd /sys/src/9/pc
+case *64*
+	cd /sys/src/9/pc64
+}
+# cd /sys/src/9/$objtype'
+echo 'MAKING KERNEL'
+sleep 1
+9fs pidos
+9fs 9fat
+mk install
+echo 'DONE MAKING KERNEL'
+sleep 1
