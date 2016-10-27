@@ -20,24 +20,31 @@ void main(int argc, char *argv[])
 		exits("Binit error with stdout");
 	}
 
-	/* read in a line, as per bio(2) we fix the delimiter (\n written over to \0) */
-	char *str = Brdline(&in, '\n');
-	int len = Blinelen(&in);
-	str[len - 1] = '\0';
-
-	/* reverse the string */
-	int i;
-	for(i = 0; i < len/2; i++)
+	int len = 0;
+	while(len != 1)
 	{
-		Rune tmp = str[i];
-		/* note: since we use Brdline(2), we have …[\0][\n] since it doesn't trim the delimiter ('\n') */
-		str[i] = str[len - 2 - i];
-		str[len - 2 - i] = tmp;
+		/* read in a line, as per bio(2) we fix the delimiter (\n written over to \0) */
+		char *str = Brdline(&in, '\n');
+		len = Blinelen(&in);
+		str[len - 1] = '\0';
+
+		/* reverse the string */
+		int i;
+		for(i = 0; i < len/2; i++)
+		{
+			Rune tmp = str[i];
+			/* note: since we use Brdline(2), we have …[\0][\n] since it doesn't trim the delimiter ('\n') */
+			str[i] = str[len - 2 - i];
+			str[len - 2 - i] = tmp;
+		}
+		
+		/* simple frontend to print(2) */
+		Bprint(&out, "%s\n", str);
+		
+		/* flush the output buffer */
+		Bflush(&out);
 	}
 
-	/* simple frontend to print(2) */
-	Bprint(&out, "%s\n", str);
-	
 	/* exit no error */
 	exits(nil);
 }
