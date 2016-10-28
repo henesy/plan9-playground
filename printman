@@ -1,0 +1,6 @@
+#!/bin/rc
+od=`{pwd}
+d=`{date -i}
+cd /sys/man
+mk print.pdf
+cp print.pdf $od/9Front_Mans_^$d^.pdf

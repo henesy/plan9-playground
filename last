@@ -1,0 +1,3 @@
+#!/bin/rc
+tail -20 /sys/log/auth
+

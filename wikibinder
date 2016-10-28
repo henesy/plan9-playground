@@ -1,0 +1,2 @@
+#!/bin/rc
+srv net!plan9.bell-labs.com!wiki wiki /n/wiki
