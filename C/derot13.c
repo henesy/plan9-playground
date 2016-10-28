@@ -2,7 +2,6 @@
 #include <libc.h>
 #include <bio.h>
 
-/* formatting is defined in style(6) ;; compile/link/run: 6c reverse.c; 6l -o 6.reverse reverse.6; ./6.reverse */
 
 /* reverses a string provided on input unless a blank string is provided */
 void main(int argc, char *argv[])
