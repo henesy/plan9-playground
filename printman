@@ -3,4 +3,4 @@ od=`{pwd}
 d=`{date -i}
 cd /sys/man
 mk print.pdf
-cp print.pdf $od/9Front_Mans_^$d^.pdf
+cp print.pdf $home^/^$od/9Front_Mans_^$d^.pdf
