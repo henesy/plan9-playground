@@ -1,0 +1,21 @@
+</$objtype/mkfile
+
+all: 
+	l=`{ls *.c}
+	for(i in $l) {
+		$CC $i
+		ln=`{echo $i | awk -F. '{print $1}'}
+		$LD -o $O^.^$ln $ln^.^$O
+	}
+
+nuke:
+	l=`{ls *.c}
+	for(i in $l) {
+		ln=`{echo $i | awk -F. '{print $1}'}
+		rm $O^.^$ln
+	}
+	mk clean
+
+clean:
+	rm *.^$O
+
