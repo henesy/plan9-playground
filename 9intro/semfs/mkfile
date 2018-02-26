@@ -1,0 +1,8 @@
+</$objtype/mkfile
+
+OFILES=semfs.$O sem.$O
+HFILES=sem.h
+TARG=$O.semfs
+BIN=$home/bin/$objtype
+
+</sys/src/cmd/mkone
