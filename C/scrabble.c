@@ -22,6 +22,7 @@ main()
 	Biobuf* in = Bfdopen(0, OREAD);
 	long r;
 	uint score = 0;
+	uint maxscore = 0;
 	
 	/* initialize known scores, easily extended */
 	for(i = 0; i < UNICODEN; i++){
@@ -62,9 +63,11 @@ main()
 
 	for(i = 0; i < UNICODEN; i++){
 		score += runes[i].value * runes[i].score;
+		if(runes[i].value > 0 && runes[i].score > 0)
+			maxscore += 10 * runes[i].score;
 	}
 	
-	print("Score: %ud\n", score);
+	print("Score: %ud\n%lg%% of max possible score\n", score, ((double)score/maxscore)*100);
 
 	Bflush(in);
 	Bterm(in);
