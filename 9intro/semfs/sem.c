@@ -1,3 +1,7 @@
+#include <u.h>
+#include <libc.h>
+#include "sem.h"
+
 Sem*	sems[Nsems];
 
 Sem*

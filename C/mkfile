@@ -18,4 +18,3 @@ nuke:
 
 clean:
 	rm *.^$O
-
