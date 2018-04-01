@@ -1,0 +1,7 @@
+CC=cc
+
+all: csv.c
+	$CC csv.c
+
+clean: a.out
+	rm a.out
