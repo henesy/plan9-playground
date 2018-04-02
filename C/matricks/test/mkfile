@@ -1,12 +1,17 @@
 </$objtype/mkfile
+
+</$objtype/mkfile
 # it's like mkone, but worse
 
 all: 
+	bind -a ../ /$objtype/include
+	bind -a ../ /$objtype/lib
 	l=`{ls *.c}
 	for(i in $l) {
 		$CC $i
 		ln=`{echo $i | awk -F. '{print $1}'}
 		$LD -o $O^.^$ln $ln^.^$O
+		./$O.$ln
 	}
 
 nuke:
@@ -18,4 +23,4 @@ nuke:
 	mk clean
 
 clean:
-	rm *.^$O
+	rm *.$O

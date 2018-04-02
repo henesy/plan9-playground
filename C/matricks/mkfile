@@ -1,0 +1,16 @@
+</$objtype/mkfile
+
+LIB=./libmatricks.a
+
+OFILES=\
+	matrix.$O \
+
+HFILES=\
+	matrix.h\
+
+UPDATE=\
+	mkfile\
+	$HFILES\
+	${OFILES:%.$O=%.c}\
+
+</sys/src/cmd/mklib
