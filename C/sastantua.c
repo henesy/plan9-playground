@@ -12,7 +12,7 @@ usage(void)
 	exits("usage");
 }
 
-/* Build a tiered pyramid of a specified size (defaulting to 1) */
+/* Build a tiered pyramid of a specified size ≥ 1 (defaulting to 1) */
 void
 main(int argc, char *argv[])
 {
@@ -27,6 +27,9 @@ main(int argc, char *argv[])
 		usage();
 	} ARGEND
 	
+	if(size < 1)
+		usage();
+
 	sastantua(size);
 
 	exits(nil);
@@ -42,11 +45,11 @@ sastantua(int size)
 
 	max_row = ft_math(0, 1, size);
 	max_chars = ft_math(max_row, 4, 0);
-	if (size > 0) {
-		if (size % 2 == 0)
+	if(size > 0) {
+		if(size % 2 == 0)
 			size = size -1;
 
-		for (i = 1; max_row > 0; max_row--, i++)
+		for(i = 1; max_row > 0; max_row--, i++)
 			ft_print_row(max_chars, ft_math(i, 4, 0), size);
 	}
 }
@@ -63,24 +66,24 @@ ft_print_row(int max_chars, int chars, int door)
 {
 	int	i;
 
-	for (i = 0; i < max_chars; i++) {
-		if (i < (max_chars / 2) - (chars / 2) || i > (max_chars / 2) + (chars / 2)) {
+	for(i = 0; i < max_chars; i++){
+		if(i < (max_chars / 2) - (chars / 2) || i > (max_chars / 2) + (chars / 2)){
 			write(1, " ", 1);
 		
-		} else if (i == (max_chars / 2) - (chars / 2) || i == (max_chars / 2) + (chars / 2)) {
+		}else if (i == (max_chars / 2) - (chars / 2) || i == (max_chars / 2) + (chars / 2)) {
 			if(i == (max_chars / 2) - (chars / 2))
 				write(1, "/", 1);
 			else
 				write(1, "\\", 1);
 		
-		} else if (max_chars - chars <= door * 2 - 1 && (i >= (max_chars / 2) - (door / 2) && i <= (max_chars / 2) + (door / 2))) { 
+		}else if (max_chars - chars <= door * 2 - 1 && (i >= (max_chars / 2) - (door / 2) && i <= (max_chars / 2) + (door / 2))){ 
 			
 			if(door > 3 && i == (max_chars / 2) + (door / 2) - 1 && max_chars - chars == door - 1)
 				write(1, "$", 1);
 			else
 				write(1, "|", 1);
 		
-		} else {
+		}else{
 			write(1, "*", 1);
 		}
 	}
@@ -103,16 +106,16 @@ ft_print_row(int max_chars, int chars, int door)
 int
 ft_math(int row, int desiredreturn, int i)
 {
-	if (desiredreturn == 1) {
-		if (i == 1)
+	if(desiredreturn == 1){
+		if(i == 1)
 			return 3;
 		else
 			return (i + 2) + ft_math(0, 1, i - 1);
 	}
 
-	if (desiredreturn == 2) {
-		if (row > 3)
-			if (row > ft_math(0, 1, i))
+	if(desiredreturn == 2){
+		if(row > 3)
+			if(row > ft_math(0, 1, i))
 				return ft_math(row, 2, i + 1);
 			else 
 				return i;
@@ -120,15 +123,15 @@ ft_math(int row, int desiredreturn, int i)
 		return 1;
 	}
 
-	if (desiredreturn == 3) {
+	if(desiredreturn == 3){
 		if (i % 2 == 0)
 			return i + 4;
 		else
 			return i + 3;
 	}
 
-	if (row > 1) {
-		if (ft_math(row, 2, 1) == ft_math(row - 1, 2, 1))
+	if(row > 1){
+		if(ft_math(row, 2, 1) == ft_math(row - 1, 2, 1))
 			return 2 + ft_math(row - 1, 4, ft_math(0, 3, ft_math(row - 1, 2, 1)));
 		else
 			return ft_math(0, 3, ft_math(row, 2, 1)) + ft_math(row - 1, 4, ft_math(0, 3, ft_math(row - 1, 2, 1)));
