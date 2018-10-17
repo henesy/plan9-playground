@@ -1,21 +1,43 @@
 </$objtype/mkfile
-# it's like mkone, but worse
 
-all: 
-	l=`{ls *.c}
-	for(i in $l) {
-		$CC $i
-		ln=`{echo $i | awk -F. '{print $1}'}
-		$LD -o $O^.^$ln $ln^.^$O
+TARG=`{ls *.c | sed 's/\.c//g'}
+PROGS=${TARG:%=$O.%}
+HFILES=
+LDFLAGS=
+NOMK=wip
+DIRS=`{echo */mkfile | sed 's,/mkfile *,\n,g' | grep -v '^('$NOMK')$'}
+
+all:V: $PROGS dirs
+
+dirs:V:
+	for(i in $DIRS) @{
+		cd $i
+		echo mk $i
+		mk $MKFLAGS all
 	}
 
-nuke:
-	l=`{ls *.c}
-	for(i in $l) {
-		ln=`{echo $i | awk -F. '{print $1}'}
-		rm $O^.^$ln
-	}
-	mk clean
+clean:V: cleanfiles clean.directories
 
-clean:
-	rm *.^$O
+nuke:V: cleanfiles nuke.directories
+
+(.*)\.([$OS])'$':R:	\1.c
+	$stem2^c $CFLAGS $stem1.c
+
+^([$OS])\.(.*):R:	\2.\1
+	$stem1^l $LDFLAGS -o $target $stem2.$stem1
+
+cleanfiles:V:
+	rm -f [$OS].out *.[$OS] y.tab.? y.debug y.output [$OS].$TARG [$OS].units.tab $TARG bc.c bc.tab.h units.tab.h units.c mpc.c mpc.tab.h [$OS]._cp
+
+%.clean:V:
+	rm -f [$OS].$stem $stem.[$OS]
+
+%.acid: %.$O $HFILES
+	$CC $CFLAGS -a $stem.c >$target
+
+%.directories:V:
+	for(i in $DIRS) @{
+		cd $i
+		echo mk $i
+		mk $MKFLAGS $stem
+	}
