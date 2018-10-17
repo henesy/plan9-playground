@@ -1,7 +1,9 @@
-CC=cc
+CC=ape/cc
 
 all: csv.c
 	$CC csv.c
 
-clean: a.out
+clean: nuke
+
+nuke: 
 	rm a.out
