@@ -1,0 +1,2 @@
+#!/bin/rc
+sshfs -m /n/postnix.us -r / -- -u seh tcp!postnix.us!49
