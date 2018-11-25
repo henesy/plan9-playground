@@ -3,21 +3,21 @@
 #include "sll.h"
 
 // Create a new list
-List
-mklist()
+Sll
+mksll()
 {
-	return (List){nil, 0};
+	return (Sll){nil, 0};
 }
 
 // Append to a list
 void
-ladd(List* l, void* p)
+ladd(Sll* l, void* p)
 {
 	int i;
-	Node* new = malloc(sizeof(Node));
+	Sllnode* new = malloc(sizeof(Sllnode));
 	new->dat = p;
 	new->next = nil;
-	Node* n = l->root;
+	Sllnode* n = l->root;
 	
 	if(l->size == 0){
 		l->root = new;
@@ -40,12 +40,12 @@ ladd(List* l, void* p)
 
 // Search → delete from a list
 void*
-ldel(List* l, void* tofind, int(*comp)(void *, void *))
+ldel(Sll* l, void* tofind, int(*comp)(void *, void *))
 {
 	int i;
 	void* dat = nil;
-	Node* n = l->root;
-	Node* prev = nil;
+	Sllnode* n = l->root;
+	Sllnode* prev = nil;
 	
 	if(l->size == 0){
 		return dat;
@@ -86,16 +86,16 @@ ldel(List* l, void* tofind, int(*comp)(void *, void *))
 	return dat;
 }
 
-// Gets a list element by "index" -- ArrayList style
+// Gets a list element by "index" -- ArraySll style
 void*
-lget(List *l, int index)
+lget(Sll *l, int index)
 {
 	// Out of bounds check
 	if(index < 0 || index >= l->size)
 		return nil;
 
 	int i;
-	Node* n = l->root;
+	Sllnode* n = l->root;
 	for(i = 0; i < l->size; i++, n = n->next)
 		if(i == index)
 			return n->dat;
