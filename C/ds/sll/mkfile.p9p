@@ -1,0 +1,11 @@
+<$PLAN9/src/mkhdr
+
+OFILES = sll.$O \
+
+HFILES = sll.h
+
+LIB = sll.a
+
+LIBDIR = /$objtype/lib
+
+<$PLAN9/src/mklib
