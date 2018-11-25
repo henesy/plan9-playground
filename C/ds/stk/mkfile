@@ -1,0 +1,25 @@
+</$objtype/mkfile
+
+OFILES = stk.$O \
+
+HFILES = stk.h
+
+LIB = stk.a
+
+LIBDIR = /$objtype/lib
+
+TTARG = test
+
+TFILE = $TTARG.c
+
+CLEANFILES = $O.$TTARG
+
+</sys/src/cmd/mklib
+
+test:V:
+	mk all
+	mk testbuild
+
+testbuild: $TFILE
+	$CC $TFILE
+	$LD -o $O.$TTARG $TTARG.$O $LIB

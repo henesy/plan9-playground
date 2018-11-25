@@ -1,0 +1,5 @@
+A basic stack data structure.
+
+Builds on Plan9port.
+
+Use `mk test` to test functionality.
