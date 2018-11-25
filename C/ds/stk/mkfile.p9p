@@ -6,7 +6,7 @@ HFILES = stk.h
 
 LIB = stk.a
 
-LIBDIR = /$objtype/lib
+LIBDIR = $PLAN9/lib
 
 TTARG = test
 
@@ -23,3 +23,4 @@ test:V:
 testbuild: $TFILE
 	$CC $TFILE
 	$LD -o $O.$TTARG $TTARG.$O $LIB
+
