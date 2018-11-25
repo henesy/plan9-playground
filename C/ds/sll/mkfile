@@ -1,0 +1,11 @@
+</$objtype/mkfile
+
+OFILES = sll.$O \
+
+HFILES = sll.h
+
+LIB = sll.a
+
+LIBDIR = /$objtype/lib
+
+</sys/src/cmd/mklib
