@@ -1,30 +1,30 @@
-#ifndef LIST_H
-#define LIST_H
+#ifndef SLLIST_H
+#define SLLIST_H
 
-/* List (Queue) Architecture */
-typedef struct Node Node;
-typedef struct List List;
+/* Sll (Queue) Architecture */
+typedef struct Sllnode Sllnode;
+typedef struct Sll Sll;
 
-struct Node {
-	Node*	next;
+struct Sllnode {
+	Sllnode*	next;
 	void*	dat;
 };
 
-struct List {
-	Node*	root;
+struct Sll {
+	Sllnode*	root;
 	uint	size;
 };
 
 // Create a new list
-List mklist(void);
+Sll mklist(void);
 
 // Append to a list
-void ladd(List*, void*);
+void ladd(Sll*, void*);
 
 // Search → delete from a list
-void* ldel(List*, void*, int(*comp)(void *, void *));
+void* ldel(Sll*, void*, int(*comp)(void *, void *));
 
 // Access elements of a list by 'index'
-void* lget(List*, int);
+void* lget(Sll*, int);
 
 #endif
